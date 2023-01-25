@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab8/services/auth_service.dart';
+
 
 class Myregister extends StatefulWidget {
   const Myregister({super.key});
@@ -26,21 +28,36 @@ class _MyregisterState extends State<Myregister> {
             controller: _username,
             decoration: InputDecoration(labelText: "Username"),
           ),
+
+          //-----------------Username--------------------
           TextFormField(
             controller: _passwordController,
             decoration: const InputDecoration(labelText: "Password"),
             obscureText: true,
-          ),TextFormField(
+
+          ),
+          
+          //-----------------Password--------------------
+          TextFormField(
             controller: _emailController,
             decoration: InputDecoration(labelText: "Email"),
+
           ),
-          ElevatedButton(onPressed: () {}, child: const Text("Summit")),
+
+          //-----------------Email------------------------
+          ElevatedButton(onPressed: () {
+            AuthService.registerFunc(_emailController.text, _passwordController.text).then((value){
+              Navigator.pop(context);
+            });
+          }, child: const Text("Summit")),
           ElevatedButton(onPressed: () {
             Navigator.push(
               context, MaterialPageRoute(
                 builder: (context) => const Myregister()
                 
                 ),
+
+              //-------------------------button summit-----------------
               );
           }, child: const Text("register")),
         ],
